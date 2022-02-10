@@ -1,0 +1,6 @@
+CMD
+pip install pyinstaller
+
+pyinstaller --onefile -w [filemane].py
+
+Move all new files to same directory. Copy resources to same folder.
