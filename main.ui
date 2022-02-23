@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
+    <width>734</width>
     <height>910</height>
    </rect>
   </property>
@@ -22,42 +22,154 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);</string>
+      </property>
       <property name="tabShape">
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
       </property>
-      <widget class="QWidget" name="tab_comm">
+      <widget class="QWidget" name="tab_news">
        <attribute name="title">
-        <string>Communicate</string>
+        <string>News</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_2">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="3" column="0">
+         <widget class="QLabel" name="lbl_news2">
           <property name="text">
-           <string>Emails</string>
+           <string>lbl2</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QTextBrowser" name="textBrowser"/>
+        <item row="4" column="0" colspan="2">
+         <widget class="QTextBrowser" name="txt_news2"/>
         </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="6" column="0" colspan="2">
+         <widget class="QTextBrowser" name="txt_news3"/>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QTextBrowser" name="txt_news1"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="btn_refresh_news">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeHint" stdset="0">
+          <property name="maximumSize">
            <size>
-            <width>20</width>
-            <height>40</height>
+            <width>70</width>
+            <height>16777215</height>
            </size>
           </property>
-         </spacer>
+          <property name="text">
+           <string>Next</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="lbl_headlines">
+          <property name="text">
+           <string>US News - Top Headlines</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="lbl_news1">
+          <property name="text">
+           <string>lbl1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="lbl_news3">
+          <property name="text">
+           <string>lbl3</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="lbl_news_img1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>160</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>160</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>lbl_img1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="lbl_news_img2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>160</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>160</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>lbl_img2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="lbl_news_img3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>160</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>160</width>
+            <height>90</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>lbl_img3</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -146,7 +258,17 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
        <attribute name="title">
         <string>Configuration</string>
        </attribute>
-       <layout class="QFormLayout" name="formLayout">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="cb_auto_login">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="1">
          <widget class="QLabel" name="label">
           <property name="layoutDirection">
@@ -157,15 +279,18 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="cb_auto_login">
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="text">
-           <string/>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
           </property>
-         </widget>
+         </spacer>
         </item>
        </layout>
       </widget>

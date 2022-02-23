@@ -1,19 +1,28 @@
 import sys, json, ctypes
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap, QImage
 from PyQt5.uic import loadUi
 from pathlib import Path
 import requests
+# import wikipediaapi 
 
 file_path = Path('config.json')
 config_file = {}
 user_data = {}
 username = ""
 first_init = True
-quote_url = "http://quotes.stormconsultancy.co.uk/random.json"
-quote_result = requests.get(quote_url).json()
 
+
+# APIs
+quote_url = "http://quotes.stormconsultancy.co.uk/random.json"
+quote_response = requests.get(quote_url).json()
+
+newsapi_key = 'ef6e6c998f0e4ba5925122cd3c9dca10'
+newsapi_search_keywords = ['country=us', 'sources=bbc-news']
+newsapi_url = (f'https://newsapi.org/v2/top-headlines?{newsapi_search_keywords[0]}&apiKey={newsapi_key}')
+newsapi_response = requests.get(newsapi_url).json()
+newsapi_data = newsapi_response["articles"]
 
 if file_path.is_file():
     with open('config.json', 'r') as f:
@@ -134,18 +143,70 @@ class Page_Main(QtWidgets.QMainWindow):
         loadUi("main.ui", self)  
         global user_data
         user_data = config_file[config_file['last_user']] 
-        quote = f"Author: {quote_result['author']}\n{quote_result['quote']}"
+        quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
         self.cb_auto_login.setChecked(user_data['auto_login'])
         self.cb_auto_login.clicked.connect(self.ch_box_auto_login)
         self.txt_browser_quotes.setText(quote)
         self.btn_refresh_quote.clicked.connect(self.get_quotes)
+
+        self.lbl_news1.setText(newsapi_data[0]['title'])
+        self.txt_news1.setText(f"{newsapi_data[0]['description']}\n <a href=\{newsapi_data[0]['url']}></a>")
+        news_img1 = QImage()
+        news_img1.loadFromData(requests.get(newsapi_data[0]['urlToImage']).content)
+        self.lbl_news_img1.setScaledContents(True)
+        self.lbl_news_img1.setPixmap(QPixmap(news_img1))
+
+        self.lbl_news2.setText(newsapi_data[1]['title'])
+        self.txt_news2.setText(f"{newsapi_data[1]['description']}\n <a href=\{newsapi_data[1]['url']}></a>")
+        news_img2 = QImage()
+        news_img2.loadFromData(requests.get(newsapi_data[1]['urlToImage']).content)
+        self.lbl_news_img2.setScaledContents(True)
+        self.lbl_news_img2.setPixmap(QPixmap(news_img2))
+
+        self.lbl_news3.setText(newsapi_data[2]['title'])
+        self.txt_news3.setText(f"{newsapi_data[2]['description']}\n <a href=\{newsapi_data[2]['url']}></a>")  
+        news_img3 = QImage()
+        news_img3.loadFromData(requests.get(newsapi_data[2]['urlToImage']).content)
+        self.lbl_news_img3.setScaledContents(True)
+        self.lbl_news_img3.setPixmap(QPixmap(news_img3))
+
+        self.news_index = 3      
+        self.btn_refresh_news.clicked.connect(self.refresh_news)
+
         widget.closeEvent = onClose
 
     ##Tab - Inspire
     def get_quotes(self):
-        quote_result = requests.get(quote_url).json()
-        quote = f"Author: {quote_result['author']}\n{quote_result['quote']}"
+        quote_response = requests.get(quote_url).json()
+        quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
         self.txt_browser_quotes.setText(quote)
+
+
+    def refresh_news(self):
+        self.lbl_news1.setText(newsapi_data[self.news_index]['title'])
+        self.txt_news1.setText(f"{newsapi_data[self.news_index]['description']}\n{newsapi_data[self.news_index]['url']}")
+        news_img1 = QImage()
+        news_img1.loadFromData(requests.get(newsapi_data[self.news_index]['urlToImage']).content)
+        self.lbl_news_img1.setScaledContents(True)
+        self.lbl_news_img1.setPixmap(QPixmap(news_img1))
+
+        self.lbl_news2.setText(newsapi_data[self.news_index+1]['title'])
+        self.txt_news2.setText(f"{newsapi_data[self.news_index+1]['description']}\n{newsapi_data[self.news_index+1]['url']}")
+        news_img2 = QImage()
+        news_img2.loadFromData(requests.get(newsapi_data[self.news_index+1]['urlToImage']).content)
+        self.lbl_news_img2.setScaledContents(True)
+        self.lbl_news_img2.setPixmap(QPixmap(news_img2))
+
+        self.lbl_news3.setText(newsapi_data[self.news_index+2]['title'])
+        self.txt_news3.setText(f"{newsapi_data[self.news_index+2]['description']}\n{newsapi_data[self.news_index+2]['url']}")   
+        news_img3 = QImage()
+        news_img3.loadFromData(requests.get(newsapi_data[self.news_index+2]['urlToImage']).content)
+        self.lbl_news_img3.setScaledContents(True)
+        self.lbl_news_img3.setPixmap(QPixmap(news_img3))
+
+        self.news_index+=3
+        
+
 
     ##Tab - Configuration
     def ch_box_auto_login(self, state):
