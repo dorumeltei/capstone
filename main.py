@@ -1,7 +1,7 @@
 import sys, json, ctypes
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox
-from PyQt5.QtGui import QIcon, QPixmap, QImage
+from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLabel
+from PyQt5.QtGui import QIcon, QPixmap, QImage, QGuiApplication
 from PyQt5.uic import loadUi
 from pathlib import Path
 import requests
@@ -149,22 +149,34 @@ class Page_Main(QtWidgets.QMainWindow):
         self.txt_browser_quotes.setText(quote)
         self.btn_refresh_quote.clicked.connect(self.get_quotes)
 
+        # lables = self.findChildren(QLabel)     
+       
+        # for row in range(1, 4):
+        #     for label in lables:
+        #         if label.objectName() == f"lbl_news_img{row}":
+        #             self.lbl_news_img1.setText(newsapi_data[0]['title'])
+        #             self.txt_news1.setText(f"{newsapi_data[0]['description']}\n <a href=\{newsapi_data[0]['url']}></a>")
+        #             print(f"lbl_news_img{row}")
+        
         self.lbl_news1.setText(newsapi_data[0]['title'])
-        self.txt_news1.setText(f"{newsapi_data[0]['description']}\n <a href=\{newsapi_data[0]['url']}></a>")
+        self.txt_news1.setOpenExternalLinks(True)
+        self.txt_news1.setText(f"{newsapi_data[0]['description']} <a href={newsapi_data[0]['url']} target=\"_blank\">link</a>")       
         news_img1 = QImage()
         news_img1.loadFromData(requests.get(newsapi_data[0]['urlToImage']).content)
         self.lbl_news_img1.setScaledContents(True)
         self.lbl_news_img1.setPixmap(QPixmap(news_img1))
 
         self.lbl_news2.setText(newsapi_data[1]['title'])
-        self.txt_news2.setText(f"{newsapi_data[1]['description']}\n <a href=\{newsapi_data[1]['url']}></a>")
+        self.txt_news2.setOpenExternalLinks(True)
+        self.txt_news2.setText(f"{newsapi_data[1]['description']} <a href={newsapi_data[1]['url']} target=\"_blank\">link</a>")
         news_img2 = QImage()
         news_img2.loadFromData(requests.get(newsapi_data[1]['urlToImage']).content)
         self.lbl_news_img2.setScaledContents(True)
         self.lbl_news_img2.setPixmap(QPixmap(news_img2))
 
         self.lbl_news3.setText(newsapi_data[2]['title'])
-        self.txt_news3.setText(f"{newsapi_data[2]['description']}\n <a href=\{newsapi_data[2]['url']}></a>")  
+        self.txt_news3.setOpenExternalLinks(True)
+        self.txt_news3.setText(f"{newsapi_data[2]['description']} <a href={newsapi_data[2]['url']} target=\"_blank\">link</a>")
         news_img3 = QImage()
         news_img3.loadFromData(requests.get(newsapi_data[2]['urlToImage']).content)
         self.lbl_news_img3.setScaledContents(True)
@@ -184,21 +196,24 @@ class Page_Main(QtWidgets.QMainWindow):
 
     def refresh_news(self):
         self.lbl_news1.setText(newsapi_data[self.news_index]['title'])
-        self.txt_news1.setText(f"{newsapi_data[self.news_index]['description']}\n{newsapi_data[self.news_index]['url']}")
+        self.txt_news1.setOpenExternalLinks(True)
+        self.txt_news1.setText(f"{newsapi_data[self.news_index]['description']} <a href={newsapi_data[self.news_index]['url']} target=\"_blank\">link</a>") 
         news_img1 = QImage()
         news_img1.loadFromData(requests.get(newsapi_data[self.news_index]['urlToImage']).content)
         self.lbl_news_img1.setScaledContents(True)
         self.lbl_news_img1.setPixmap(QPixmap(news_img1))
 
         self.lbl_news2.setText(newsapi_data[self.news_index+1]['title'])
-        self.txt_news2.setText(f"{newsapi_data[self.news_index+1]['description']}\n{newsapi_data[self.news_index+1]['url']}")
+        self.txt_news2.setOpenExternalLinks(True)
+        self.txt_news2.setText(f"{newsapi_data[self.news_index+1]['description']} <a href={newsapi_data[self.news_index+1]['url']} target=\"_blank\">link</a>") 
         news_img2 = QImage()
         news_img2.loadFromData(requests.get(newsapi_data[self.news_index+1]['urlToImage']).content)
         self.lbl_news_img2.setScaledContents(True)
         self.lbl_news_img2.setPixmap(QPixmap(news_img2))
 
         self.lbl_news3.setText(newsapi_data[self.news_index+2]['title'])
-        self.txt_news3.setText(f"{newsapi_data[self.news_index+2]['description']}\n{newsapi_data[self.news_index+2]['url']}")   
+        self.txt_news3.setOpenExternalLinks(True)
+        self.txt_news3.setText(f"{newsapi_data[self.news_index+2]['description']} <a href={newsapi_data[self.news_index+2]['url']} target=\"_blank\">link</a>")    
         news_img3 = QImage()
         news_img3.loadFromData(requests.get(newsapi_data[self.news_index+2]['urlToImage']).content)
         self.lbl_news_img3.setScaledContents(True)
