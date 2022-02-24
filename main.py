@@ -1,6 +1,6 @@
 import sys, json, ctypes
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLabel
+from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLabel, QTextBrowser
 from PyQt5.QtGui import QIcon, QPixmap, QImage, QGuiApplication
 from PyQt5.uic import loadUi
 from pathlib import Path
@@ -12,7 +12,6 @@ config_file = {}
 user_data = {}
 username = ""
 first_init = True
-
 
 # APIs
 quote_url = "http://quotes.stormconsultancy.co.uk/random.json"
@@ -140,88 +139,44 @@ class Page_Create_Account(QDialog):
 class Page_Main(QtWidgets.QMainWindow):
     def __init__(self):
         super(Page_Main, self).__init__()
-        loadUi("main.ui", self)  
+        loadUi("digest.ui", self)  
         global user_data
         user_data = config_file[config_file['last_user']] 
         quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
         self.cb_auto_login.setChecked(user_data['auto_login'])
         self.cb_auto_login.clicked.connect(self.ch_box_auto_login)
         self.txt_browser_quotes.setText(quote)
-        self.btn_refresh_quote.clicked.connect(self.get_quotes)
-
-        # lables = self.findChildren(QLabel)     
-       
-        # for row in range(1, 4):
-        #     for label in lables:
-        #         if label.objectName() == f"lbl_news_img{row}":
-        #             self.lbl_news_img1.setText(newsapi_data[0]['title'])
-        #             self.txt_news1.setText(f"{newsapi_data[0]['description']}\n <a href=\{newsapi_data[0]['url']}></a>")
-        #             print(f"lbl_news_img{row}")
-        
-        self.lbl_news1.setText(newsapi_data[0]['title'])
-        self.txt_news1.setOpenExternalLinks(True)
-        self.txt_news1.setText(f"{newsapi_data[0]['description']} <a href={newsapi_data[0]['url']} target=\"_blank\">link</a>")       
-        news_img1 = QImage()
-        news_img1.loadFromData(requests.get(newsapi_data[0]['urlToImage']).content)
-        self.lbl_news_img1.setScaledContents(True)
-        self.lbl_news_img1.setPixmap(QPixmap(news_img1))
-
-        self.lbl_news2.setText(newsapi_data[1]['title'])
-        self.txt_news2.setOpenExternalLinks(True)
-        self.txt_news2.setText(f"{newsapi_data[1]['description']} <a href={newsapi_data[1]['url']} target=\"_blank\">link</a>")
-        news_img2 = QImage()
-        news_img2.loadFromData(requests.get(newsapi_data[1]['urlToImage']).content)
-        self.lbl_news_img2.setScaledContents(True)
-        self.lbl_news_img2.setPixmap(QPixmap(news_img2))
-
-        self.lbl_news3.setText(newsapi_data[2]['title'])
-        self.txt_news3.setOpenExternalLinks(True)
-        self.txt_news3.setText(f"{newsapi_data[2]['description']} <a href={newsapi_data[2]['url']} target=\"_blank\">link</a>")
-        news_img3 = QImage()
-        news_img3.loadFromData(requests.get(newsapi_data[2]['urlToImage']).content)
-        self.lbl_news_img3.setScaledContents(True)
-        self.lbl_news_img3.setPixmap(QPixmap(news_img3))
-
-        self.news_index = 3      
-        self.btn_refresh_news.clicked.connect(self.refresh_news)
-
+        self.btn_refresh_quote.clicked.connect(self.get_quotes)        
+           
+        self.btn_refresh_news.clicked.connect(self.get_news)
+        self.news_index = 0 
+        self.get_news()
         widget.closeEvent = onClose
+        
+    ##Tab - News
+    def get_news(self):
+        no_of_rows = 3                
+        for row in range(0, no_of_rows):
+            lbl_title = self.findChild(QLabel, f'lbl_news_title_{row}')
+            lbl_title.setText(newsapi_data[self.news_index]['title'])
+            txt_body = self.findChild(QTextBrowser, f'txt_body_{row}')
+            txt_body.setOpenExternalLinks(True)
+            txt_body.setText(f"{newsapi_data[self.news_index]['description']} <a href={newsapi_data[self.news_index]['url']} target=\"_blank\">link</a>")
+            try:
+                img = QImage()   
+                img.loadFromData(requests.get(newsapi_data[self.news_index]['urlToImage']).content)
+                lbl_img = self.findChild(QLabel, f'img_news_{row}')
+                lbl_img.setScaledContents(True)
+                lbl_img.setPixmap(QPixmap(img))
+            except:
+                lbl_img.setText("Image not available")
+            self.news_index +=1
 
     ##Tab - Inspire
     def get_quotes(self):
         quote_response = requests.get(quote_url).json()
         quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
-        self.txt_browser_quotes.setText(quote)
-
-
-    def refresh_news(self):
-        self.lbl_news1.setText(newsapi_data[self.news_index]['title'])
-        self.txt_news1.setOpenExternalLinks(True)
-        self.txt_news1.setText(f"{newsapi_data[self.news_index]['description']} <a href={newsapi_data[self.news_index]['url']} target=\"_blank\">link</a>") 
-        news_img1 = QImage()
-        news_img1.loadFromData(requests.get(newsapi_data[self.news_index]['urlToImage']).content)
-        self.lbl_news_img1.setScaledContents(True)
-        self.lbl_news_img1.setPixmap(QPixmap(news_img1))
-
-        self.lbl_news2.setText(newsapi_data[self.news_index+1]['title'])
-        self.txt_news2.setOpenExternalLinks(True)
-        self.txt_news2.setText(f"{newsapi_data[self.news_index+1]['description']} <a href={newsapi_data[self.news_index+1]['url']} target=\"_blank\">link</a>") 
-        news_img2 = QImage()
-        news_img2.loadFromData(requests.get(newsapi_data[self.news_index+1]['urlToImage']).content)
-        self.lbl_news_img2.setScaledContents(True)
-        self.lbl_news_img2.setPixmap(QPixmap(news_img2))
-
-        self.lbl_news3.setText(newsapi_data[self.news_index+2]['title'])
-        self.txt_news3.setOpenExternalLinks(True)
-        self.txt_news3.setText(f"{newsapi_data[self.news_index+2]['description']} <a href={newsapi_data[self.news_index+2]['url']} target=\"_blank\">link</a>")    
-        news_img3 = QImage()
-        news_img3.loadFromData(requests.get(newsapi_data[self.news_index+2]['urlToImage']).content)
-        self.lbl_news_img3.setScaledContents(True)
-        self.lbl_news_img3.setPixmap(QPixmap(news_img3))
-
-        self.news_index+=3
-        
-
+        self.txt_browser_quotes.setText(quote)   
 
     ##Tab - Configuration
     def ch_box_auto_login(self, state):

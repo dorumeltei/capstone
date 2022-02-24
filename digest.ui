@@ -41,20 +41,20 @@ color: rgb(255, 255, 255);</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="3" column="0">
-         <widget class="QLabel" name="lbl_news2">
+         <widget class="QLabel" name="lbl_news_title_1">
           <property name="text">
-           <string>lbl2</string>
+           <string>lbl1</string>
           </property>
          </widget>
         </item>
         <item row="4" column="0" colspan="2">
-         <widget class="QTextBrowser" name="txt_news2"/>
+         <widget class="QTextBrowser" name="txt_body_1"/>
         </item>
         <item row="6" column="0" colspan="2">
-         <widget class="QTextBrowser" name="txt_news3"/>
+         <widget class="QTextBrowser" name="txt_body_2"/>
         </item>
         <item row="2" column="0" colspan="2">
-         <widget class="QTextBrowser" name="txt_news1"/>
+         <widget class="QTextBrowser" name="txt_body_0"/>
         </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="btn_refresh_news">
@@ -83,21 +83,21 @@ color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="lbl_news1">
+         <widget class="QLabel" name="lbl_news_title_0">
           <property name="text">
-           <string>lbl1</string>
+           <string>lbl0</string>
           </property>
          </widget>
         </item>
         <item row="5" column="0">
-         <widget class="QLabel" name="lbl_news3">
+         <widget class="QLabel" name="lbl_news_title_2">
           <property name="text">
-           <string>lbl3</string>
+           <string>lbl2</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLabel" name="lbl_news_img1">
+         <widget class="QLabel" name="img_news_0">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -122,7 +122,7 @@ color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLabel" name="lbl_news_img2">
+         <widget class="QLabel" name="img_news_1">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -147,7 +147,7 @@ color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLabel" name="lbl_news_img3">
+         <widget class="QLabel" name="img_news_2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
