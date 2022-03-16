@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>734</width>
+    <width>594</width>
     <height>910</height>
    </rect>
   </property>
@@ -22,6 +22,12 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="styleSheet">
        <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(255, 255, 255);</string>
@@ -30,7 +36,7 @@ color: rgb(255, 255, 255);</string>
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
@@ -117,7 +123,7 @@ color: rgb(255, 255, 255);</string>
            </size>
           </property>
           <property name="text">
-           <string>lbl_img1</string>
+           <string>lbl_img0</string>
           </property>
          </widget>
         </item>
@@ -142,7 +148,7 @@ color: rgb(255, 255, 255);</string>
            </size>
           </property>
           <property name="text">
-           <string>lbl_img2</string>
+           <string>lbl_img1</string>
           </property>
          </widget>
         </item>
@@ -167,7 +173,7 @@ color: rgb(255, 255, 255);</string>
            </size>
           </property>
           <property name="text">
-           <string>lbl_img3</string>
+           <string>lbl_img2</string>
           </property>
          </widget>
         </item>
@@ -249,7 +255,133 @@ color: rgb(255, 255, 255);</string>
        <attribute name="title">
         <string>Entertain</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3"/>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="1">
+         <widget class="QLabel" name="lbl_jokes">
+          <property name="text">
+           <string>Jokes:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QTextBrowser" name="txt_humor"/>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="lbl_humor">
+          <property name="text">
+           <string>Humor:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="btn_refresh_jokes">
+          <property name="text">
+           <string>Next joke</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QPushButton" name="btn_refresh_humor">
+          <property name="text">
+           <string>Next humor</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Radio</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>248</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_radio_play">
+               <property name="minimumSize">
+                <size>
+                 <width>101</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Play</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>218</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="lbl_jokes_2">
+          <property name="text">
+           <string>Memes:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QTextBrowser" name="txt_jokes"/>
+        </item>
+        <item row="3" column="3">
+         <widget class="QPushButton" name="btn_refresh_memes">
+          <property name="text">
+           <string>Next meme</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="lbl_img_memes">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>600</width>
+            <height>400</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_conf">
        <property name="layoutDirection">
@@ -259,27 +391,33 @@ color: rgb(255, 255, 255);</string>
         <string>Configuration</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="cb_auto_login">
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label">
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string>Login using last credentials. Ask for confirmation.</string>
-          </property>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="comboBox">
+          <item>
+           <property name="text">
+            <string>News</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Inspire</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Entertain</string>
+           </property>
+          </item>
          </widget>
         </item>
         <item row="2" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Start tab</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
          <spacer name="verticalSpacer_2">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -291,6 +429,26 @@ color: rgb(255, 255, 255);</string>
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="1" column="2">
+         <widget class="QCheckBox" name="cb_auto_login">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string>Login using last credentials. Ask for confirmation.</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

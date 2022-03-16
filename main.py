@@ -1,8 +1,11 @@
 import sys, json, ctypes
+from PyQt5.QtCore import QUrl, QTimer
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLabel, QTextBrowser
+from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLabel, QTextBrowser, QPushButton, QStyle
 from PyQt5.QtGui import QIcon, QPixmap, QImage, QGuiApplication
 from PyQt5.uic import loadUi
+from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
+from PyQt5.QtMultimediaWidgets import QVideoWidget
 from pathlib import Path
 import requests
 # import wikipediaapi 
@@ -14,14 +17,50 @@ username = ""
 first_init = True
 
 # APIs
+# Quotes
 quote_url = "http://quotes.stormconsultancy.co.uk/random.json"
-quote_response = requests.get(quote_url).json()
 
 newsapi_key = 'ef6e6c998f0e4ba5925122cd3c9dca10'
 newsapi_search_keywords = ['country=us', 'sources=bbc-news']
 newsapi_url = (f'https://newsapi.org/v2/top-headlines?{newsapi_search_keywords[0]}&apiKey={newsapi_key}')
-newsapi_response = requests.get(newsapi_url).json()
-newsapi_data = newsapi_response["articles"]
+
+# Jokes
+jokesapi_url = "https://humor-jokes-and-memes.p.rapidapi.com/jokes/random"
+jokesapi_querystring = {"api-key":"undefined","max-length":"200","include-tags":"one_liner","min-rating":"7","exclude-tags":"nsfw","keywords":"rocket"}
+jokesapi_headers = {
+    'x-rapidapi-host': "humor-jokes-and-memes.p.rapidapi.com",
+    'x-rapidapi-key': "09119aef4cmshd3b58d3da340673p186437jsnf4c8854db8d4"
+    }
+
+# Memes
+memesapi_url = "https://humor-jokes-and-memes.p.rapidapi.com/memes/random"
+memesapi_querystring = {"api-key":"undefined","number":"3","media-type":"image","keywords-in-image":"true","min-rating":"7"}
+memesapi_headers = {
+    'x-rapidapi-host': "humor-jokes-and-memes.p.rapidapi.com",
+    'x-rapidapi-key': "09119aef4cmshd3b58d3da340673p186437jsnf4c8854db8d4"
+    }
+
+# Humor
+base_url = 'https://api.humorapi.com/'
+jokes_url = 'jokes/random?'
+memes_url = 'memes/random?'
+humorapi_key = '7d3031ae95c2424a8629e4e75575bce3'
+
+humorapi_url = f"{base_url}{jokes_url}api-key={humorapi_key}"
+
+# meme_url = 'https://api.humorapi.com/memes/random?keywords=rocket'
+
+radio_url = "https://radio-world-50-000-radios-stations.p.rapidapi.com/v1/radios/getTopByCountry"
+
+radio_querystring = {"query":"tr"}
+
+radio_headers = {
+    'x-rapidapi-host': "radio-world-50-000-radios-stations.p.rapidapi.com",
+    'x-rapidapi-key': "09119aef4cmshd3b58d3da340673p186437jsnf4c8854db8d4"
+    }
+
+radioapi_response = requests.get(radio_url, headers=radio_headers, params=radio_querystring).json()
+
 
 if file_path.is_file():
     with open('config.json', 'r') as f:
@@ -142,19 +181,51 @@ class Page_Main(QtWidgets.QMainWindow):
         loadUi("digest.ui", self)  
         global user_data
         user_data = config_file[config_file['last_user']] 
-        quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
+        # quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
         self.cb_auto_login.setChecked(user_data['auto_login'])
         self.cb_auto_login.clicked.connect(self.ch_box_auto_login)
-        self.txt_browser_quotes.setText(quote)
-        self.btn_refresh_quote.clicked.connect(self.get_quotes)        
-           
+
         self.btn_refresh_news.clicked.connect(self.get_news)
         self.news_index = 0 
-        self.get_news()
-        widget.closeEvent = onClose
+        # self.get_news()
         
+        self.txt_browser_quotes.setText('')
+        self.btn_refresh_quote.clicked.connect(self.get_quotes) 
+        # self.get_quotes()
+
+        self.txt_jokes.setText('')
+        self.btn_refresh_jokes.clicked.connect(self.get_jokes)        
+        # self.get_jokes()
+        
+        self.lbl_img_memes.setText('')
+        self.btn_refresh_memes.clicked.connect(self.get_memes)        
+        # self.get_memes()
+
+        self.txt_humor.setText('')
+        self.btn_refresh_humor.clicked.connect(self.get_humor)        
+        # self.get_humor()
+
+        radio_url = "https://scdn.nrjaudio.fm/fr/30607/mp3_128.mp3?origine=mytuner&aw_0_1st.station=Nostalgie-Funk&cdn_path=adswizz_lbs12&adws_out_b1&access_token=538457b5aa0f4d6cbc8a05a67a6b22b3"
+
+        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        self.mediaPlayer.setMedia(QMediaContent(QUrl(radio_url)))
+        # videoWidget = QVideoWidget()
+        
+        self.btn_radio_play.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
+        self.btn_radio_play.clicked.connect(self.play)
+
+        self.delay_load = QTimer()
+        self.delay_load.start(3000)
+        self.delay_load.timeout.connect(self.load_all_apis)
+
+        widget.closeEvent = onClose
+    
+    
     ##Tab - News
     def get_news(self):
+        print('starting getting news')
+        newsapi_response = requests.get(newsapi_url).json()
+        newsapi_data = newsapi_response["articles"]
         no_of_rows = 3                
         for row in range(0, no_of_rows):
             lbl_title = self.findChild(QLabel, f'lbl_news_title_{row}')
@@ -169,6 +240,7 @@ class Page_Main(QtWidgets.QMainWindow):
                 lbl_img.setScaledContents(True)
                 lbl_img.setPixmap(QPixmap(img))
             except:
+                lbl_img = QLabel()
                 lbl_img.setText("Image not available")
             self.news_index +=1
 
@@ -176,7 +248,53 @@ class Page_Main(QtWidgets.QMainWindow):
     def get_quotes(self):
         quote_response = requests.get(quote_url).json()
         quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
-        self.txt_browser_quotes.setText(quote)   
+        self.txt_browser_quotes.setText(quote) 
+
+    ##Tab - Entertain
+    # 1 - Jokes
+    def get_jokes(self):
+        jokesapi_response = requests.get(jokesapi_url, headers=jokesapi_headers, params=jokesapi_querystring).json()
+        try:
+            jokesapi_data = jokesapi_response['joke']
+            self.txt_jokes.setText(jokesapi_data)
+        except:
+            self.txt_jokes.setText('Jokes reached maxium per day')
+
+    # 2 - Memes
+    def get_memes(self):
+        memesapi_response = requests.get(memesapi_url, headers=memesapi_headers, params=memesapi_querystring).json()
+        # memesapi_data = 'https://preview.redd.it/mtavie3t4kr31.jpg?width=640&crop=smart&auto=webp&s=77a0e2e7bbe6ec68f2343d7b11081af2cf60a55f'
+        try:
+            memesapi_data = memesapi_response['url']
+            img_memes = QImage()  
+            img_memes.loadFromData(requests.get(memesapi_data).content) 
+            self.lbl_img_memes.setScaledContents(False)
+            self.lbl_img_memes.setPixmap(QPixmap(img_memes))
+        except:
+            self.lbl_img_memes.setText("Image not available")
+
+    # 3 - Humor
+    def get_humor(self):
+        humorapi_response = requests.get(humorapi_url).json()
+        humorapi_data = humorapi_response['joke']
+        self.txt_humor.setText(humorapi_data)
+
+    # 4 - Radio
+    def play(self):
+        if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
+            self.mediaPlayer.pause()
+            self.btn_radio_play.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
+        else:
+            self.btn_radio_play.setIcon(self.style().standardIcon(QStyle.SP_MediaPause))
+            self.mediaPlayer.play() 
+    
+    def load_all_apis(self):
+        self.delay_load.stop()
+        self.get_news()
+        self.get_quotes()
+        self.get_jokes()
+        self.get_memes()
+        self.get_humor()
 
     ##Tab - Configuration
     def ch_box_auto_login(self, state):
@@ -230,4 +348,5 @@ if __name__ == "__main__":
     # print('object name', widget.objectName()) 
     # widget.closeEvent = onClose	 
     widget.show()
+    
     app.exec_()
