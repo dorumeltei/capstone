@@ -1,11 +1,9 @@
 {
     "last_user": "doru",
     "doru": {
-        "password": "11111",
-        "auto_login": true
+        "password": "111111",
+        "auto_login": true,
+        "default_tab": 2
     },
-    "dm2": {
-        "password": "22222",
-        "auto_login": false
-    }
+    "": {}
 }

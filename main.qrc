@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>img/_Button FB OFF.png</file>
+    <file>img/_Button FB ON.png</file>
+    <file>img/_Button Gray_round_Down2.png</file>
+    <file>img/_Button Gray_round_Up2.png</file>
+  </qresource>
+</RCC>

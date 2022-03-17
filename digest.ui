@@ -6,20 +6,100 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>594</width>
-    <height>910</height>
+    <width>525</width>
+    <height>901</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dailiy Digest</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(54, 54, 54);
+font-size:18pt; 
+color:rgb(255, 255, 255);
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true">background-color: rgb(54, 54, 54);
 color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+
+QTabWidget {
+    
+    border:1px solid #4F95DA;
+    color:#4F95DA;
+}</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="btn_window_close">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>oswald</family>
+          <pointsize>-1</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <underline>false</underline>
+          <strikeout>false</strikeout>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:36px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:12px;
+    font-family:oswald;
+</string>
+        </property>
+        <property name="text">
+         <string>x</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/icons/icons/ionicons.designerpack/close.svg</normaloff>:/icons/icons/ionicons.designerpack/close.svg</iconset>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="autoRaise">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
@@ -29,19 +109,48 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
        </sizepolicy>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(255, 255, 255);</string>
+       <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:36px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:18px;
+    font-family:oswald;
+</string>
       </property>
       <property name="tabShape">
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
       </property>
       <widget class="QWidget" name="tab_news">
+       <property name="styleSheet">
+        <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:166px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;</string>
+       </property>
        <attribute name="title">
         <string>News</string>
        </attribute>
@@ -49,7 +158,7 @@ color: rgb(255, 255, 255);</string>
         <item row="3" column="0">
          <widget class="QLabel" name="lbl_news_title_1">
           <property name="text">
-           <string>lbl1</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -60,7 +169,18 @@ color: rgb(255, 255, 255);</string>
          <widget class="QTextBrowser" name="txt_body_2"/>
         </item>
         <item row="2" column="0" colspan="2">
-         <widget class="QTextBrowser" name="txt_body_0"/>
+         <widget class="QTextBrowser" name="txt_body_0">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'oswald'; font-size:14px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:18pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
         </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="btn_refresh_news">
@@ -75,6 +195,61 @@ color: rgb(255, 255, 255);</string>
             <width>70</width>
             <height>16777215</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    overflow:hidden;
+    position:relative;
+    display:block;
+    width:166px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;
+}
+QPushButton span {
+    position:relative;
+    transition:color .25s ease-out;
+    -webkit-transition:color .5s ease-out;
+    -moz-transition:color .5s ease-out;
+}
+
+QPushButton:hover{
+    color:#fff;
+}
+QPushButton:hover {
+   position:absolute;
+    top:0;
+    left:0;
+    display:block;
+    width:100%;
+    height:100%;
+    background:#4F95DA;
+    border:1px solid transparent;
+   transform:scale(1,0);
+    -webkit-transform:scale(1,0);
+    -moz-transform:scale(1,0);
+    -ms-transform:scale(1,0);
+    transform-origin:center top;
+    -webkit-transform-origin:center top;
+    -moz-transform-origin:center top;
+    -ms-transform-origin:center top;
+   transition:all .2s ease-out;
+    -webkit-transition:all .2s ease-out;
+    -moz-transition:all .2s ease-out;
+}
+QPushButton:hover{
+   transform:scale(1,1);
+   -webkit-transform:scale(1,1);
+   -moz-transform:scale(1,1);
+   -ms-transform:scale(1,1);
+}</string>
           </property>
           <property name="text">
            <string>Next</string>
@@ -91,14 +266,14 @@ color: rgb(255, 255, 255);</string>
         <item row="1" column="0">
          <widget class="QLabel" name="lbl_news_title_0">
           <property name="text">
-           <string>lbl0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item row="5" column="0">
          <widget class="QLabel" name="lbl_news_title_2">
           <property name="text">
-           <string>lbl2</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -123,7 +298,7 @@ color: rgb(255, 255, 255);</string>
            </size>
           </property>
           <property name="text">
-           <string>lbl_img0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -148,7 +323,7 @@ color: rgb(255, 255, 255);</string>
            </size>
           </property>
           <property name="text">
-           <string>lbl_img1</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -173,13 +348,29 @@ color: rgb(255, 255, 255);</string>
            </size>
           </property>
           <property name="text">
-           <string>lbl_img2</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_insp">
+       <property name="styleSheet">
+        <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:166px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;</string>
+       </property>
        <attribute name="title">
         <string>Inspire</string>
        </attribute>
@@ -187,14 +378,69 @@ color: rgb(255, 255, 255);</string>
         <item row="3" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Stream1</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="btn_play_cam1">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    overflow:hidden;
+    position:relative;
+    display:block;
+    width:66px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;
+}
+QPushButton span {
+    position:relative;
+    transition:color .25s ease-out;
+    -webkit-transition:color .5s ease-out;
+    -moz-transition:color .5s ease-out;
+}
+
+QPushButton:hover{
+    color:#fff;
+}
+QPushButton:hover {
+   position:absolute;
+    top:0;
+    left:0;
+    display:block;
+    width:100%;
+    height:100%;
+    background:#4F95DA;
+    border:1px solid transparent;
+   transform:scale(1,0);
+    -webkit-transform:scale(1,0);
+    -moz-transform:scale(1,0);
+    -ms-transform:scale(1,0);
+    transform-origin:center top;
+    -webkit-transform-origin:center top;
+    -moz-transform-origin:center top;
+    -ms-transform-origin:center top;
+   transition:all .2s ease-out;
+    -webkit-transition:all .2s ease-out;
+    -moz-transition:all .2s ease-out;
+}
+QPushButton:hover{
+   transform:scale(1,1);
+   -webkit-transform:scale(1,1);
+   -moz-transform:scale(1,1);
+   -ms-transform:scale(1,1);
+}</string>
+          </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>Play</string>
           </property>
          </widget>
         </item>
@@ -205,18 +451,12 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QTextBrowser" name="textBrowser_2"/>
-        </item>
         <item row="6" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Stream2</string>
           </property>
          </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QTextBrowser" name="textBrowser_3"/>
         </item>
         <item row="5" column="0">
          <widget class="Line" name="line_2">
@@ -226,9 +466,64 @@ color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="7" column="1">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="btn_play_cam2">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    overflow:hidden;
+    position:relative;
+    display:block;
+    width:66px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;
+}
+QPushButton span {
+    position:relative;
+    transition:color .25s ease-out;
+    -webkit-transition:color .5s ease-out;
+    -moz-transition:color .5s ease-out;
+}
+
+QPushButton:hover{
+    color:#fff;
+}
+QPushButton:hover {
+   position:absolute;
+    top:0;
+    left:0;
+    display:block;
+    width:100%;
+    height:100%;
+    background:#4F95DA;
+    border:1px solid transparent;
+   transform:scale(1,0);
+    -webkit-transform:scale(1,0);
+    -moz-transform:scale(1,0);
+    -ms-transform:scale(1,0);
+    transform-origin:center top;
+    -webkit-transform-origin:center top;
+    -moz-transform-origin:center top;
+    -ms-transform-origin:center top;
+   transition:all .2s ease-out;
+    -webkit-transition:all .2s ease-out;
+    -moz-transition:all .2s ease-out;
+}
+QPushButton:hover{
+   transform:scale(1,1);
+   -webkit-transform:scale(1,1);
+   -moz-transform:scale(1,1);
+   -ms-transform:scale(1,1);
+}</string>
+          </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>Play</string>
           </property>
          </widget>
         </item>
@@ -244,14 +539,88 @@ color: rgb(255, 255, 255);</string>
         </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="btn_refresh_quote">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    overflow:hidden;
+    position:relative;
+    display:block;
+    width:66px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;
+}
+QPushButton span {
+    position:relative;
+    transition:color .25s ease-out;
+    -webkit-transition:color .5s ease-out;
+    -moz-transition:color .5s ease-out;
+}
+
+QPushButton:hover{
+    color:#fff;
+}
+QPushButton:hover {
+   position:absolute;
+    top:0;
+    left:0;
+    display:block;
+    width:100%;
+    height:100%;
+    background:#4F95DA;
+    border:1px solid transparent;
+   transform:scale(1,0);
+    -webkit-transform:scale(1,0);
+    -moz-transform:scale(1,0);
+    -ms-transform:scale(1,0);
+    transform-origin:center top;
+    -webkit-transform-origin:center top;
+    -moz-transform-origin:center top;
+    -ms-transform-origin:center top;
+   transition:all .2s ease-out;
+    -webkit-transition:all .2s ease-out;
+    -moz-transition:all .2s ease-out;
+}
+QPushButton:hover{
+   transform:scale(1,1);
+   -webkit-transform:scale(1,1);
+   -moz-transform:scale(1,1);
+   -ms-transform:scale(1,1);
+}</string>
+          </property>
           <property name="text">
            <string>Refresh</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QGraphicsView" name="video_cam1"/>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="video_cam2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>250</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_ent">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <attribute name="title">
         <string>Entertain</string>
        </attribute>
@@ -275,6 +644,22 @@ color: rgb(255, 255, 255);</string>
         </item>
         <item row="1" column="3">
          <widget class="QPushButton" name="btn_refresh_jokes">
+          <property name="styleSheet">
+           <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:166px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;</string>
+          </property>
           <property name="text">
            <string>Next joke</string>
           </property>
@@ -282,6 +667,22 @@ color: rgb(255, 255, 255);</string>
         </item>
         <item row="6" column="3">
          <widget class="QPushButton" name="btn_refresh_humor">
+          <property name="styleSheet">
+           <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:166px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;</string>
+          </property>
           <property name="text">
            <string>Next humor</string>
           </property>
@@ -357,6 +758,22 @@ color: rgb(255, 255, 255);</string>
         </item>
         <item row="3" column="3">
          <widget class="QPushButton" name="btn_refresh_memes">
+          <property name="styleSheet">
+           <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:166px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;</string>
+          </property>
           <property name="text">
            <string>Next meme</string>
           </property>
@@ -387,12 +804,67 @@ color: rgb(255, 255, 255);</string>
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
+       <property name="styleSheet">
+        <string notr="true">    overflow:hidden;
+    position:relative;
+    display:block;
+    width:166px;
+    height:38px;
+   border-radius: 12px;
+    line-height:40px;
+    border:1px solid #4F95DA;;
+    color:#4F95DA;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:14px;
+    font-family:oswald;</string>
+       </property>
        <attribute name="title">
         <string>Configuration</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string>Login using last credentials</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="cb_auto_login">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Start tab</string>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="1">
-         <widget class="QComboBox" name="comboBox">
+         <widget class="QComboBox" name="cb_start_tab">
           <item>
            <property name="text">
             <string>News</string>
@@ -408,46 +880,6 @@ color: rgb(255, 255, 255);</string>
             <string>Entertain</string>
            </property>
           </item>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Start tab</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="2">
-         <widget class="QCheckBox" name="cb_auto_login">
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QLabel" name="label">
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string>Login using last credentials. Ask for confirmation.</string>
-          </property>
          </widget>
         </item>
        </layout>

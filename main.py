@@ -1,11 +1,12 @@
 import sys, json, ctypes
-from PyQt5.QtCore import QUrl, QTimer
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLabel, QTextBrowser, QPushButton, QStyle
-from PyQt5.QtGui import QIcon, QPixmap, QImage, QGuiApplication
-from PyQt5.uic import loadUi
+from PyQt5.QtCore import QUrl, QTimer, Qt
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLabel, QTextBrowser, QStyle
+from PyQt5.QtGui import QIcon, QPixmap, QImage
 from PyQt5.QtMultimediaWidgets import QVideoWidget
+from PyQt5.uic import loadUi
+
 from pathlib import Path
 import requests
 # import wikipediaapi 
@@ -45,20 +46,16 @@ base_url = 'https://api.humorapi.com/'
 jokes_url = 'jokes/random?'
 memes_url = 'memes/random?'
 humorapi_key = '7d3031ae95c2424a8629e4e75575bce3'
-
 humorapi_url = f"{base_url}{jokes_url}api-key={humorapi_key}"
-
 # meme_url = 'https://api.humorapi.com/memes/random?keywords=rocket'
 
+# Radio
 radio_url = "https://radio-world-50-000-radios-stations.p.rapidapi.com/v1/radios/getTopByCountry"
-
 radio_querystring = {"query":"tr"}
-
 radio_headers = {
     'x-rapidapi-host': "radio-world-50-000-radios-stations.p.rapidapi.com",
     'x-rapidapi-key': "09119aef4cmshd3b58d3da340673p186437jsnf4c8854db8d4"
     }
-
 radioapi_response = requests.get(radio_url, headers=radio_headers, params=radio_querystring).json()
 
 
@@ -84,6 +81,7 @@ class Page_Auto_Login(QDialog):
         loadUi("auto_login.ui", self)
         self.btn_confirm.accepted.connect(self.goto_page_main)
         self.btn_confirm.rejected.connect(self.goto_page_login)
+        self.btn_window_close.clicked.connect(lambda x:save_data_on_close())
         
     def goto_page_login(self):
         page_login = Page_Login()
@@ -104,6 +102,7 @@ class Page_Auto_Login(QDialog):
         widget.setGeometry(x_pos, y_pos, width, height) 
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+
 class Page_Login(QDialog):
     def __init__(self):
         super(Page_Login, self).__init__()
@@ -111,6 +110,8 @@ class Page_Login(QDialog):
         self.btn_login.clicked.connect(self.login)
         self.input_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
         self.btn_create_account.clicked.connect(self.goto_page_create_user)
+        self.btn_window_close.clicked.connect(lambda x:save_data_on_close())
+        
 
     def login(self):
         global config_file, user_data, username        
@@ -143,6 +144,7 @@ class Page_Create_Account(QDialog):
         self.btn_sign_up.clicked.connect(self.create_account)
         self.input_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
         self.input_confirm_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.btn_window_close.clicked.connect(lambda x:save_data_on_close())
 
     def create_account(self):
         global config_file        
@@ -170,7 +172,7 @@ class Page_Create_Account(QDialog):
                 with open('config.json', 'r+') as f:
                     config_file = json.load(f)
                     config_file.update({username: {"password": password,
-                        "auto_login": False}})
+                        "auto_login": False, "default_tab": 0}})
                     f.seek(0)  # reset file pointer to position 0
                     json.dump(config_file, f, indent=4)
                 Page_Auto_Login.goto_page_login(QDialog)
@@ -181,9 +183,14 @@ class Page_Main(QtWidgets.QMainWindow):
         loadUi("digest.ui", self)  
         global user_data
         user_data = config_file[config_file['last_user']] 
-        # quote = f"Author: {quote_response['author']}\n{quote_response['quote']}"
-        self.cb_auto_login.setChecked(user_data['auto_login'])
+        tab_index = user_data['default_tab']
+        self.tabWidget.setCurrentIndex(tab_index)
+
+        # Tab Configuration
+        self.cb_auto_login.setChecked(2)
         self.cb_auto_login.clicked.connect(self.ch_box_auto_login)
+        self.cb_start_tab.setCurrentIndex(tab_index)
+        self.cb_start_tab.currentIndexChanged.connect(self.change_start_tab)
 
         self.btn_refresh_news.clicked.connect(self.get_news)
         self.news_index = 0 
@@ -204,23 +211,51 @@ class Page_Main(QtWidgets.QMainWindow):
         self.txt_humor.setText('')
         self.btn_refresh_humor.clicked.connect(self.get_humor)        
         # self.get_humor()
-
+        
         radio_url = "https://scdn.nrjaudio.fm/fr/30607/mp3_128.mp3?origine=mytuner&aw_0_1st.station=Nostalgie-Funk&cdn_path=adswizz_lbs12&adws_out_b1&access_token=538457b5aa0f4d6cbc8a05a67a6b22b3"
-
+        
         self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
         self.mediaPlayer.setMedia(QMediaContent(QUrl(radio_url)))
         # videoWidget = QVideoWidget()
-        
         self.btn_radio_play.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
         self.btn_radio_play.clicked.connect(self.play)
+
+
+
+
+
+
+
+
+
+
+        live_cam1_stream = 'https://www.youtube.com/watch?v=48MFrf5ADp8'
+
+        self.mediaPlayer2 = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        self.mediaPlayer2.setMedia(QMediaContent(QUrl(live_cam1_stream)))
+        videoWidget = QVideoWidget()
+        # self.btn_radio_play.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
+        # self.btn_radio_play.clicked.connect(self.play)
+        # self.video_cam2.setPixmap((videoWidget)
+        self.mediaPlayer2.play() 
+
+
+
+
+
+
+
+
+
+        
 
         self.delay_load = QTimer()
         self.delay_load.start(3000)
         self.delay_load.timeout.connect(self.load_all_apis)
 
         widget.closeEvent = onClose
-    
-    
+        self.btn_window_close.clicked.connect(lambda x:save_data_on_close())  
+
     ##Tab - News
     def get_news(self):
         print('starting getting news')
@@ -241,7 +276,7 @@ class Page_Main(QtWidgets.QMainWindow):
                 lbl_img.setPixmap(QPixmap(img))
             except:
                 lbl_img = QLabel()
-                lbl_img.setText("Image not available")
+                lbl_img.setText("Memes reached maximum per day")
             self.news_index +=1
 
     ##Tab - Inspire
@@ -268,16 +303,19 @@ class Page_Main(QtWidgets.QMainWindow):
             memesapi_data = memesapi_response['url']
             img_memes = QImage()  
             img_memes.loadFromData(requests.get(memesapi_data).content) 
-            self.lbl_img_memes.setScaledContents(False)
+            self.lbl_img_memes.setScaledContents(True)
             self.lbl_img_memes.setPixmap(QPixmap(img_memes))
         except:
-            self.lbl_img_memes.setText("Image not available")
+            self.lbl_img_memes.setText("Memes reached maximum per day")
 
     # 3 - Humor
     def get_humor(self):
         humorapi_response = requests.get(humorapi_url).json()
-        humorapi_data = humorapi_response['joke']
-        self.txt_humor.setText(humorapi_data)
+        try:
+            humorapi_data = humorapi_response['joke']
+            self.txt_humor.setText(humorapi_data)
+        except:
+            self.txt_humor.setText("Humor reached maximum per day")
 
     # 4 - Radio
     def play(self):
@@ -290,15 +328,18 @@ class Page_Main(QtWidgets.QMainWindow):
     
     def load_all_apis(self):
         self.delay_load.stop()
-        self.get_news()
-        self.get_quotes()
-        self.get_jokes()
-        self.get_memes()
-        self.get_humor()
+        # self.get_news()
+        # self.get_quotes()
+        # self.get_jokes()
+        # self.get_memes()
+        # self.get_humor()
 
     ##Tab - Configuration
     def ch_box_auto_login(self, state):
         user_data['auto_login'] = state   
+
+    def change_start_tab(self, value):
+        user_data['default_tab'] = value 
         
 
 def onResize(event):
@@ -314,9 +355,13 @@ def onMove(event):
     # print(page_x, page_y)
 
 def onClose(event):
+    save_data_on_close()
+
+def save_data_on_close():
     config_file[username] = user_data
     with open('config.json', 'w') as f:
         json.dump(config_file, f, indent=4)
+    sys.exit()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -346,7 +391,7 @@ if __name__ == "__main__":
     widget.resizeEvent = onResize
     widget.moveEvent = onMove  
     # print('object name', widget.objectName()) 
-    # widget.closeEvent = onClose	 
+    # widget.closeEvent = onClose	
+    widget.setWindowFlags(Qt.FramelessWindowHint) 
     widget.show()
-    
     app.exec_()
