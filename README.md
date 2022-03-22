@@ -10,11 +10,11 @@ A simple and intuitive app that gets categorized information via APIs.
     Windows 10 or 11
 
 * Python library:
-    PyQt5==5.15.6
-    PyQt5-Qt5==5.15.2
-    PyQt5-sip==12.9.1
-    PyQtWebEngine==5.15.5
-    requests==2.27.1
+    * PyQt5==5.15.6
+    * PyQt5-Qt5==5.15.2
+    * PyQt5-sip==12.9.1
+    * PyQtWebEngine==5.15.5
+    * requests==2.27.1
 
 * APIs used:
     * https://newsapi.org/
