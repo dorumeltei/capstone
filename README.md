@@ -41,8 +41,8 @@ A simple and intuitive app that gets categorized information via APIs.
 
 ## Authors
 
-Doru Meltei (dhoroo1ro@yahoo.com) 
-Cagdas Yetkin (cagdasyetkin@yahoo.com)
+* Doru Meltei (dhoroo1ro@yahoo.com) 
+* Cagdas Yetkin (cagdasyetkin@yahoo.com)
 
 ## Version History
 
