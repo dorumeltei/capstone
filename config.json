@@ -1,0 +1,14 @@
+{
+    "last_user": null,
+    "dorum": {
+        "password": "11111",
+        "auto_login": false,
+        "default_tab": 0,
+        "apikey_news": "",
+        "apikey_quotes": "",
+        "apikey_jokes": "",
+        "apikey_memes": "",
+        "apikey_humor": "",
+        "apikey_radio": ""
+    }
+}
