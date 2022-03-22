@@ -32,7 +32,7 @@ A simple and intuitive app that gets categorized information via APIs.
 
 ### Executing program
 
-* Run "daily-digest.exe"
+* Run "main.py" or convert main.py to exe using pyinstaller: "pyinstaller --onefile -w main.py"  
 * Initial configuration: 
     * A local "config.json" file is created at first initialization. All user-based configuration is stored here. A more secure solution for account storage will be implemented in future releases.
     * create a new user and login
